@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Traducción de Audio en Tiempo Real</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/wavefile"></script>
+</head>
+<body>
+    <h1>Aplicación de Traducción de Audio</h1>
+
+    <!-- Opción 1: Subir archivo de audio -->
+    <h2>Subir Archivo de Audio</h2>
+    <form id="uploadForm" method="POST" enctype="multipart/form-data">
+        <label for="audio_file">Selecciona un archivo de audio (WAV):</label>
+        <input type="file" id="audio_file" name="audio_file" accept=".wav">
+        
+        <label for="idioma_destino">Selecciona el idioma de destino:</label>
+        <select id="idioma_destino" name="idioma_destino">
+            <option value="en">Inglés</option>
+            <option value="fr">Francés</option>
+            <option value="de">Alemán</option>
+            <option value="ko">Coreano</option>
+        </select>
+        
+        <button type="submit">Subir y Traducir</button>
+    </form>
+
+    <!-- Opción 2: Grabar audio en tiempo real -->
+    <h2>Grabar Audio en Tiempo Real</h2>
+    <label for="idioma_destino_grabado">Selecciona el idioma de destino:</label>
+    <select id="idioma_destino_grabado">
+        <option value="en">Inglés</option>
+        <option value="fr">Francés</option>
+        <option value="de">Alemán</option>
+        <option value="ko">Coreano</option>
+    </select>
+
+    <button id="start-record-btn">Iniciar Grabación</button>
+    <button id="stop-record-btn" style="display:none;">Detener Grabación</button>
+
+    <!-- Indicadores de estado de grabación -->
+    <div id="recordingStatus" style="display:none;">
+        <p id="recordingMessage">Grabando...</p>
+    </div>
+
+    <!-- Indicador de procesamiento de audio -->
+    <div id="processingStatus" style="display:none;">
+        <p>Procesando el audio, por favor espera...</p>
+    </div>
+
+    <h2>Texto en Español:</h2>
+    <div id="texto_en_espanol"></div>
+
+    <h2>Traducción:</h2>
+    <div id="traduccion"></div>
+
+    <!-- Carga de los dos archivos JavaScript -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/recording.js') }}"></script>
+    
+</body>
+</html>
